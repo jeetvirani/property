@@ -1,7 +1,3 @@
-# Buzztime
-
-Buzztime - A project to create ultimate bar and restaurant entertainment experience.
-
 ##Steps to Setup Local Environment.
 
 ###To setup local environment dependencies
