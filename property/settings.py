@@ -71,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'property.wsgi.application'
 
-
+AUTH_USER_MODEL = "pms.User"
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
