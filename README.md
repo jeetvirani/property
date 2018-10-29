@@ -33,17 +33,15 @@
    `source pyvenv/bin/activate`
 2. Create a file as `.env` and copy all the environmental variables listed in Documentation.
 3. Create `out` folder by executing `mkdir out`.
-4. To use sqlite3 as DB:
-   Change environment variable CONNECT_DB to False
-5. Export Environmental Variables
+4. Export Environmental Variables
    `export $(cat .env)`
-6. Run Migrations:
+5. Run Migrations:
    `python manage.py migrate`
-7. Create SuperUser:
+6. Create SuperUser:
    `python manage.py createsuperuser`
-8. Run Server:
+7. Run Server:
    `python manage.py runserver`
-9. Access Django Admin:
+8. Access Django Admin:
    Hit `127.0.0.1:8000/api/admin` in browser and provide your superuser credentials.
 
 ###Adding Customized Data
