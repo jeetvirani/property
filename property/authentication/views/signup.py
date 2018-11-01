@@ -9,9 +9,7 @@ from django.views import View
 from property.authentication.serializers import SignUpValidator
 from property.authentication.utils import catch_error
 from property.pms.models import User
-from property.services.jwt_utils import JWT_UTIL
-from property.services.utils import validate_serializer, generate_user_token
-from property.services.exceptions import BadToken, UserNotFound, UserIsActive
+from property.services.utils import validate_serializer
 
 
 class SignUp(View):
@@ -37,12 +35,11 @@ class SignUp(View):
         password = serializer.validated_data['password']
         for key, value in serializer.validated_data.items():
             setattr(User, key, value)
-        print(data['username'])
         user = User.objects.create(
             username=data['username'],
-            password=password
+            password=password,
+            mobile_no=data['mobile_no']
         )
-        print(User)
         user.save()
 
-        return JsonResponse(user)
+        return JsonResponse({"suc": True})

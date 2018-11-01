@@ -10,9 +10,9 @@ from rest_framework.compat import authenticate
 from property.authentication.serializers import LoginValidator
 from property.authentication.utils import catch_error
 from property.services.exceptions import InvalidUsernameOrPassword
-from property.services.utils import generate_user_token, validate_serializer
-
-
+from property.services.utils import validate_serializer
+from rest_framework.authtoken.models import Token
+from property.pms.models import User
 
 class Login(View):
     """
@@ -34,22 +34,22 @@ class Login(View):
         serializer = LoginValidator(data=data)
         validate_serializer(serializer)
 
-        email = serializer.validated_data['email']
+        username = serializer.validated_data['username']
         password = serializer.validated_data['password']
 
-        user = authenticate(request=request, email=email, password=password)
-
+        user = User.objects.all().filter(username=username, password=password)
+        user = user[0]
+        #  TODO user Django auth
+        # user = authenticate(username=username, password=password)
         if not user:
             raise InvalidUsernameOrPassword
-
-        token = generate_user_token(user)
-
+        token = Token.objects.create(user=user)
+        print (token.key)
         data = dict(
             error=False,
             msg='Successful',
-            token=token,
-            user=user.full_name,
-            uuid=user.uuid
+            token=token.key,
+            user=user.username
         )
 
         return JsonResponse(data)

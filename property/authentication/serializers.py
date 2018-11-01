@@ -33,7 +33,7 @@ class LoginValidator(BaseSerializer):
     """
     a serializer to serialize and validate username and password
     """
-    email = serializers.EmailField(required=True)
+    username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
 
 

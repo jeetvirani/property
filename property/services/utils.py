@@ -34,18 +34,6 @@ def get_absolute_time(expiry_time=0):
     return actual_time.strftime(fmt)
 
 
-def generate_user_token(user):
-    """
-    This function generates the token by applying md5 on hash of pk and time.
-    :param user:
-    :return: token
-    """
-    order = hash((user.pk, time.time()))
-    encoded_order = str(order).encode('utf-8')
-    token = hashlib.md5(encoded_order).hexdigest()
-    return token
-
-
 def validate_serializer(serializer):
     """
     To validate a serializer and raise error on bad validation
