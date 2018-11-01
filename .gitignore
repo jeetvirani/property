@@ -2,7 +2,7 @@
 venv
 pyenv
 pyvenv
-/out/
+/out/*
 # Ignore generated files
 db.sqlite3
 *.pyc
