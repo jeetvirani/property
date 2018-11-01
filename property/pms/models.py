@@ -38,6 +38,7 @@ class User(AbstractUser, BaseModel):
     """
     A model which overrides User model
     """
+    user_id = models.AutoField(primary_key=True)
     interest = models.ManyToManyField(PropertyInterest, related_name='interest')
     property_type = models.ManyToManyField(PropertyType, related_name='property_type')
     app = models.CharField(max_length=50)
@@ -45,6 +46,8 @@ class User(AbstractUser, BaseModel):
     company_contract_info = models.CharField(max_length=50)
     company_profile = models.CharField(max_length=50)
     user_type = models.ManyToManyField(UserType, related_name='user_type')
+    class Meta:
+        db_table = 'user' 
 
 class NearBy(models.Model):
     nearby_Id = models.AutoField(primary_key=True)
@@ -83,15 +86,23 @@ class TransactionType(models.Model):
     trans_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     class Meta:
-        db_table = 'transaction_type'         
+        db_table = 'transaction_type' 
+
+class UnitArea(models.Model):
+    unitarea_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    class Meta:
+        db_table = 'unit_area'         
 
 class Property(AbstractProperty,BaseModel):
+    property_id = models.AutoField(primary_key=True)
     nearby = models.ManyToManyField(NearBy, related_name='near_by')
     location = models.ManyToManyField(Location, related_name='location')
     amenity = models.ManyToManyField(Amenities, related_name='amenities')
     document = models.ManyToManyField(Document, related_name='document')
     transaction_type = models.ManyToManyField(TransactionType, related_name='transaction_type')
     property_type = models.ManyToManyField(PropertyType, related_name='property_type')
+    unit_area = models.ManyToManyField(UnitArea, related_name='unit_area')
     budget = models.CharField(max_length=50)
     duration = models.CharField(max_length=50)
     bedrooms = models.CharField(max_length=50)
@@ -106,11 +117,18 @@ class Property(AbstractProperty,BaseModel):
     no_of_floors = models.CharField(max_length=50)
     property_type = models.CharField(max_length=50)
     builtup_area = models.CharField(max_length=50)
+    land_area = models.CharField(max_length=50)
+    carpet_area = models.CharField(max_length=50)
     is_buyable = models.BooleanField(default=False)
     user_type = models.ManyToManyField(UserType, related_name='user_type')
+    class Meta:
+        db_table = 'property' 
 
 
-
-
-
-
+class Booking(AbstractProperty,BaseModel):
+    booking_id = models.AutoField(primary_key=True)
+    user = models.ManyToManyField(User, related_name='user')
+    property = models.ManyToManyField(Property, related_name='property')
+    seller = models.CharField(max_length=50)
+    amount = models.CharField(max_length=50)
+  
