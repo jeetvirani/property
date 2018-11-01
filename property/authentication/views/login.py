@@ -44,7 +44,6 @@ class Login(View):
         if not user:
             raise InvalidUsernameOrPassword
         token = Token.objects.create(user=user)
-        print (token.key)
         data = dict(
             error=False,
             msg='Successful',

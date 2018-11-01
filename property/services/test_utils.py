@@ -39,17 +39,17 @@ def load_test_data(fixture_data):
     call_command('loaddata', fixture_data, verbosity=0)
 
 
-def get_token(email, password):
+def get_token(username, password):
     """
     get login token for the user
     :param user_name:
     :param password:
     :return:
     """
-    payload = dict(password=password, email=email)
+    payload = dict(password=password, username=username)
     data = json.dumps(payload)
     client = Client()
-    resp = client.post('/api/auth/login/', data=data, content_type='application/json')
+    resp = client.post('/auth/login/', data=data, content_type='application/json')
     login_data = json.loads(resp.content.decode('utf-8'))
     login_token = 'TOKEN ' + login_data['token']
     return login_token

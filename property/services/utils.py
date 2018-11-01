@@ -1,12 +1,8 @@
 """
 A module which contains utils function
 """
-import hashlib
-import time
 import logging
-from datetime import timedelta
 from functools import wraps
-from django.utils import timezone
 
 from django.db import transaction
 from rest_framework import status
@@ -19,19 +15,6 @@ from property.services.exceptions import InvalidUsernameOrPassword, UserNotActiv
 LOGGER = logging.getLogger('property')
 
 INTERNAL_SERVER_ERROR = "Internal Server Error. Please retry after some time."
-
-
-def get_absolute_time(expiry_time=0):
-    """
-    This Function will return the absolute time by adding expiry_time seconds to current time.
-    :param expiry_time:
-    :return:
-    """
-    current_date = timezone.localtime()
-    delta = timedelta(seconds=expiry_time)
-    fmt = '%Y-%m-%d %H:%M %Z'
-    actual_time = current_date + delta
-    return actual_time.strftime(fmt)
 
 
 def validate_serializer(serializer):
