@@ -89,12 +89,12 @@ class TransactionType(models.Model):
         db_table = 'transaction_type' 
 
 class UnitArea(models.Model):
-    unitarea_id = models.AutoField(primary_key=True)
+    unit_area_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     class Meta:
         db_table = 'unit_area'         
 
-class Property(AbstractProperty,BaseModel):
+class Property(BaseModel):
     property_id = models.AutoField(primary_key=True)
     nearby = models.ManyToManyField(NearBy, related_name='near_by')
     location = models.ManyToManyField(Location, related_name='location')
@@ -120,15 +120,17 @@ class Property(AbstractProperty,BaseModel):
     land_area = models.CharField(max_length=50)
     carpet_area = models.CharField(max_length=50)
     is_buyable = models.BooleanField(default=False)
-    user_type = models.ManyToManyField(UserType, related_name='user_type')
+    user_type = models.ManyToManyField(UserType, related_name='Property_user_type')
     class Meta:
         db_table = 'property' 
 
 
-class Booking(AbstractProperty,BaseModel):
+class Booking(BaseModel):
     booking_id = models.AutoField(primary_key=True)
     user = models.ManyToManyField(User, related_name='user')
     property = models.ManyToManyField(Property, related_name='property')
     seller = models.CharField(max_length=50)
     amount = models.CharField(max_length=50)
+    class Meta:
+        db_table = 'booking'
   
