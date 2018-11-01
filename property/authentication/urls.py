@@ -16,13 +16,9 @@ Including another URLconf
 
 from django.urls import path
 
-from property.authentication.views import login, forgot_password, \
-    reset_password, provide_access, signup
+from property.authentication.views import login, signup
 
 urlpatterns = [
     path('login/', login.Login.as_view(), name='login'),
-    path('forgot/', forgot_password.ForgotPassword.as_view(), name='forgot'),
-    path('reset/<token>/', reset_password.ResetPassword.as_view(), name='reset'),
-    path('signup/<token>/', signup.SignUp.as_view(), name='reset'),
-    path('apps/', provide_access.ProvideAccess.as_view(), name='provide_apps')
+    path('signup/<token>/', signup.SignUp.as_view(), name='reset')
 ]

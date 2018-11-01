@@ -8,12 +8,6 @@ MIN_PASSWORD_LENGTH = 8
 WEAK_PASSWORD = "Weak Password. Make Sure it contains minimum 8 Characters, 1 Alphabet, 1 Number " \
                 "and 1 special Character."
 
-FORGOT_PASSWORD_EXPIRY_TIME = 60*60
-
-FORGOT_PASSWORD_EMAIL_TEMPLATE = '3986455dc581a9b89ea6601ce787278b'
-
-RESET_PASSWORD_END_POINT = FRONT_END_URL + '/reset-password/{0}/'
-
 SIGNUP_EXPIRY_TIME = 24*60*60
 
 SIGNUP_TEMPLATE = '934b67ff06f9568ff6739650e1527bea'

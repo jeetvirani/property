@@ -127,6 +127,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+FRONT_END_URL = os.environ.get("FRONT_END_URL", "http://localhost:8083")
+JWT_SECRET = os.environ.get("JWT_SECRET", "DEBUG")
+ENCODING_ALGORITHM = os.environ.get("ENCODING_ALGORITHM", "DEBUG")
+
+JWT_EXP_DELTA_SECONDS = os.environ.get("JWT_EXP_DELTA_SECONDS", "DEBUG")
 
 # Logging Settings
 # http://docs.djangoproject.com/en/dev/topics/
