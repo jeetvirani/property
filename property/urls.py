@@ -19,4 +19,5 @@ from django.urls import include, path
 urlpatterns = [
     path('pms/', include('property.pms.urls')),
     path('admin/', admin.site.urls),
+    path('auth/', include('property.authentication.urls')),
 ]
