@@ -53,7 +53,7 @@ def validate_serializer(serializer):
     :return:
     """
     if not serializer.is_valid():
-        raise ValueError("Invalid Parameter passed")
+        raise ValueError(serializer.errors)
 
 
 def rollback_log_error(error, status_code):

@@ -43,6 +43,8 @@ class User(AbstractUser, BaseModel):
     property_type = models.ManyToManyField(PropertyType, related_name='property_type')
     app = models.CharField(max_length=50)
     company_name = models.CharField(max_length=50)
+    mobile_no = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
     company_contract_info = models.CharField(max_length=50)
     company_profile = models.CharField(max_length=50)
     user_type = models.ManyToManyField(UserType, related_name='user_type')

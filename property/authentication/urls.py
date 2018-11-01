@@ -20,5 +20,5 @@ from property.authentication.views import login, signup
 
 urlpatterns = [
     path('login/', login.Login.as_view(), name='login'),
-    path('signup/<token>/', signup.SignUp.as_view(), name='reset')
+    path('signup/', signup.SignUp.as_view(), name='reset')
 ]

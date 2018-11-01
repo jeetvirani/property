@@ -19,7 +19,7 @@ class SignUp(View):
     A class which has post method for reset password functionality
     """
     @catch_error
-    def post(self, request, token):
+    def post(self, request):
         """
         This method will take the jwt token and first_name, last_name and password in body and
         validates and sets the attribute to the user object password of the user. It will raise
@@ -30,40 +30,26 @@ class SignUp(View):
         """
 
         data = json.loads(request.body.decode('utf-8'))
-
-        serializer = SignUpValidator(data=data)
-        validate_serializer(serializer)
-
-        payload = JWT_UTIL.decode(token)
-        uuid = payload.get('uuid')
-        if not uuid:
-            raise BadToken
-
-        try:
-            user = User.objects.get(uuid=uuid)
-        except Exception:
-            raise UserNotFound
-
-        if user.is_active:
-            raise UserIsActive
-
-        password = serializer.validated_data['password']
-
-        for key, value in serializer.validated_data.items():
-            setattr(user, key, value)
-
-        user.set_password(password)
-        user.verify(True)
-        user.set_state(True)
-
-        token = generate_user_token(user)
-
-
-        data = dict(
-            error=False,
-            msg='Successful',
-            token=token,
-            user=user.full_name
+        # print(data)
+        # serializer = SignUpValidator(data=data)
+        # validate_serializer(serializer)
+        # print(serializer)
+        print(data['username'])
+        User.objects.create(
+            username=data['username'],
+            mobile_no=data['mobile_no']
         )
+        print(User)
+        # user.set_password(data['password'])
+        # user.save()
+        
+        # password = serializer.validated_data['password']
+        # for key, value in serializer.validated_data.items():
+        #     setattr(User, key, value)
 
-        return JsonResponse(data)
+        # data = dict(
+        #     error=False,
+        #     msg='Successful',
+        # )
+
+        return JsonResponse("jeet")

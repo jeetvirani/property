@@ -67,6 +67,6 @@ class SignUpValidator(PasswordValidator):
     """
     a serializer for SignUp
     """
-    first_name = serializers.CharField(required=True)
-    last_name = serializers.CharField(required=True)
+    mobile_no = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
 
