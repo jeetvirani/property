@@ -77,16 +77,22 @@ AUTH_USER_MODEL = "pms.User"
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'property_development',
+#         'USER': 'postgres',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'property_development',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
 
 
 # Password validation
@@ -127,11 +133,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-FRONT_END_URL = os.environ.get("FRONT_END_URL", "http://localhost:8083")
-JWT_SECRET = os.environ.get("JWT_SECRET", "DEBUG")
-ENCODING_ALGORITHM = os.environ.get("ENCODING_ALGORITHM", "DEBUG")
+JWT_SECRET = os.environ.get("JWT_SECRET", "")
+ENCODING_ALGORITHM = os.environ.get("ENCODING_ALGORITHM", "")
 
-JWT_EXP_DELTA_SECONDS = os.environ.get("JWT_EXP_DELTA_SECONDS", "DEBUG")
+JWT_EXP_DELTA_SECONDS = os.environ.get("JWT_EXP_DELTA_SECONDS", "")
 
 # Logging Settings
 # http://docs.djangoproject.com/en/dev/topics/

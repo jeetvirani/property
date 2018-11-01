@@ -31,25 +31,18 @@ class SignUp(View):
 
         data = json.loads(request.body.decode('utf-8'))
         # print(data)
-        # serializer = SignUpValidator(data=data)
-        # validate_serializer(serializer)
+        serializer = SignUpValidator(data=data)
+        validate_serializer(serializer)
         # print(serializer)
+        password = serializer.validated_data['password']
+        for key, value in serializer.validated_data.items():
+            setattr(User, key, value)
         print(data['username'])
-        User.objects.create(
+        user = User.objects.create(
             username=data['username'],
-            mobile_no=data['mobile_no']
+            password=password
         )
         print(User)
-        # user.set_password(data['password'])
-        # user.save()
-        
-        # password = serializer.validated_data['password']
-        # for key, value in serializer.validated_data.items():
-        #     setattr(User, key, value)
+        user.save()
 
-        # data = dict(
-        #     error=False,
-        #     msg='Successful',
-        # )
-
-        return JsonResponse("jeet")
+        return JsonResponse(user)

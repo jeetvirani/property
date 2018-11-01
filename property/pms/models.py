@@ -49,7 +49,7 @@ class User(AbstractUser, BaseModel):
     company_profile = models.CharField(max_length=50)
     user_type = models.ManyToManyField(UserType, related_name='user_type')
     class Meta:
-        db_table = 'user' 
+        db_table = 'User'
 
 class NearBy(models.Model):
     nearby_Id = models.AutoField(primary_key=True)
